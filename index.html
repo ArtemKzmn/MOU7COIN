@@ -58,17 +58,22 @@
             countElement.innerText = count; // Обновление отображаемого счётчика
         }
 
-        // Увеличиваем счёт на 1
-        function incrementCount() {
-            count++;
-            localStorage.setItem('score', count);
-            updateCount();
+        // Уменьшаем счёт на 1
+        function decrementCount() {
+            if(count > 0) { // Проверяем, что счёт больше 0
+                count--; // Уменьшаем счёт на 1
+                localStorage.setItem('score', count); // Сохранение счёта в LocalStorage
+                updateCount(); // Обновление отображаемого счётчика
+            }
         }
 
         // Обработчик событий
         coinElement.addEventListener('click', () => {
-            incrementCount();
+            decrementCount(); // Уменьшаем счёт при нажатии на монету
         });
+        
+        // Изначальное обновление отображаемого счётчика
+        updateCount();
     </script>
 </body>
 </html>
