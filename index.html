@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MO7COIN</title>
+    <title>MOU7COIN</title>
     <style>
         body {
             display: flex;
@@ -19,8 +19,8 @@
             user-select: none; /* Убрать выделение текста */
         }
         .coin {
-            width: 300px; /* Ширина монеты */
-            height: 300px; /* Высота монеты */
+            width: 900px; /* Ширина монеты */
+            height: 900px; /* Высота монеты */
             background-image: url('логотип MOU7.jpg'); /* Укажите путь к изображению монеты */
             background-size: contain; /* Изображение должно быть целиком видно */
             background-repeat: no-repeat; /* Запрет на повторение изображения */
@@ -28,17 +28,10 @@
             transition: transform 0.1s ease; /* Эффект плавного изменения размера */
             outline: none; /* Убираем синий контур */
             margin-bottom: 20px; /* Отступ между иконкой и счётчиком */
+            -webkit-tap-highlight-color: transparent; /* Убираем цвет выделения на Android */
         }
         .coin:active {
             transform: scale(0.9); /* Уменьшение при нажатии */
-        }
-
-        /* Специальные стили для Android, чтобы убрать синие выделения */
-        .coin:focus {
-            outline: none; /* Убираем контур при фокусе */
-        }
-        .coin:active {
-            background-color: transparent; /* Убираем цвет фона при нажатии */
         }
 
         .counter {
