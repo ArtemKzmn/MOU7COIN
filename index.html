@@ -19,13 +19,15 @@
             user-select: none; /* Убрать выделение текста */
         }
         .coin {
-            width: 300px;
-            height: 300px;
+            width: 300px; /* Увеличение ширины до 300 пикселей (3x) */
+            height: 300px; /* Увеличение высоты до 300 пикселей (3x) */
             background-image: url('логотип MOU7.jpg'); /* Укажите путь к изображению монеты */
-            background-size: cover;
+            background-size: contain; /* Изображение будет масштабироваться так, чтобы полностью поместиться */
+            background-repeat: no-repeat; /* Запрет на повторение изображения */
             cursor: pointer;
             transition: transform 0.1s ease; /* Эффект плавного изменения размера */
             outline: none; /* Убираем синее выделение */
+            margin-bottom: 20px; /* Отступ между иконкой и счётчиком */
         }
         .coin:active {
             transform: scale(0.9); /* Уменьшение при нажатии */
