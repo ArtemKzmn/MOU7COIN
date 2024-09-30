@@ -29,12 +29,13 @@
             margin: 20px 0; /* Отступы сверху и снизу */
             -webkit-tap-highlight-color: transparent; /* Убираем цвет выделения на Android */
         }
-        .coin:active {
+        .coin:active,
+        .coin.animate {
             transform: scale(0.9); /* Уменьшение при нажатии */
         }
 
         .counter {
-            font-size: 80px; /* Уменьшенный размер шрифта для счётчика (в 2 раза) */
+            font-size: 80px; /* Уменьшенный размер шрифта для счётчика */
             margin-bottom: 20px; /* Отступ между счётчиком и иконкой */
         }
     </style>
@@ -65,7 +66,17 @@
             updateCount(); // Обновление отображаемого счёта
         }
 
-        // Привязываем обработчик события клика к элементам
+        // Обработчики событий для анимации на устройствах iOS
+        coinElement.addEventListener('touchstart', function() {
+            coinElement.classList.add('animate'); // Добавляем класс при нажатии
+        });
+
+        coinElement.addEventListener('touchend', function() {
+            coinElement.classList.remove('animate'); // Убираем класс по окончании нажатия
+            incrementCount(); // Увеличиваем счёт при отпускании
+        });
+
+        // Привязываем обработчик события клика к элементам для Android
         coinElement.addEventListener('click', incrementCount);
         countElement.addEventListener('click', incrementCount);
     </script>
