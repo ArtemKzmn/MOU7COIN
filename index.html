@@ -55,32 +55,23 @@
 
         // Функция обновления счётчика
         function updateCount() {
-            countElement.innerText = count;
+            countElement.innerText = count; // Обновление отображаемого счётчика
         }
 
-        // Обновление отображаемого счёта изначально
-        updateCount();
-
-        // Функция для увеличения счёта
+        // Увеличиваем счёт на 1
         function incrementCount() {
-            count++;
+            count++; // Увеличиваем счёт на 1
             localStorage.setItem('score', count); // Сохранение счёта в LocalStorage
-            updateCount(); // Обновление отображаемого счёта
+            updateCount(); // Обновление отображаемого счётчика
         }
 
-        // Обработчики событий для анимации на устройствах iOS
-        coinElement.addEventListener('touchstart', function() {
-            coinElement.classList.add('animate'); // Добавляем класс при нажатии
+        // Обработчик событий
+        coinElement.addEventListener('click', () => {
+            incrementCount(); // Увеличиваем счёт при нажатии на монету
         });
-
-        coinElement.addEventListener('touchend', function() {
-            coinElement.classList.remove('animate'); // Убираем класс по окончании нажатия
-            incrementCount(); // Увеличиваем счёт при отпускании
-        });
-
-        // Привязываем обработчик события клика к элементам для Android
-        coinElement.addEventListener('click', incrementCount);
-        countElement.addEventListener('click', incrementCount);
+        
+        // Изначальное обновление отображаемого счётчика
+        updateCount();
     </script>
 </body>
 </html>
