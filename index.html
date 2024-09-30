@@ -14,15 +14,17 @@
             margin: 0;
             background-color: #000; /* Чёрный фон */
             color: #fff; /* Белый цвет текста счётчика */
-            font-size: 48px; /* Размер шрифта для счётчика */
+            font-size: 5vw; /* Размер шрифта для счётчика, адаптивный */
             touch-action: manipulation; /* Запретить выделение на мобильных */
             user-select: none; /* Убрать выделение текста */
         }
         .coin {
-            width: 300px; /* Увеличение ширины до 300 пикселей (3x) */
-            height: 300px; /* Увеличение высоты до 300 пикселей (3x) */
+            width: 30vw; /* Ширина монеты, адаптивная */
+            height: 30vw; /* Высота монеты, адаптивная */
+            max-width: 300px; /* Максимальная ширина */
+            max-height: 300px; /* Максимальная высота */
             background-image: url('логотип MOU7.jpg'); /* Укажите путь к изображению монеты */
-            background-size: contain; /* Изображение будет масштабироваться так, чтобы полностью поместиться */
+            background-size: contain; /* Изображение должно быть целиком видно */
             background-repeat: no-repeat; /* Запрет на повторение изображения */
             cursor: pointer;
             transition: transform 0.1s ease; /* Эффект плавного изменения размера */
@@ -34,31 +36,38 @@
         }
         .counter {
             margin-bottom: 20px; /* Отступ между счётчиком и иконкой */
-            touch-action: manipulation; /* Запретить выделение на мобильных для счётчика */
-            user-select: none; /* Убрать выделение текста */
         }
     </style>
 </head>
 <body>
     <div class="counter" id="count">0</div> <!-- Убрали текст "Счёт" -->
-    <div class="coin" onclick="incrementCount()"></div>
+    <div class="coin" id="coin"></div>
 
     <script>
+        // Получаем состояние счётчика из localStorage или устанавливаем в 0
         let count = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
 
-        // Обновление отображаемого счёта
-        document.getElementById('count').innerText = count;
+        const countElement = document.getElementById('count');
+        const coinElement = document.getElementById('coin');
 
-        function incrementCount() {
-            count++;
-            document.getElementById('count').innerText = count;
-
-            // Сохранение счёта в LocalStorage
-            localStorage.setItem('score', count);
+        // Функция обновления счётчика
+        function updateCount() {
+            countElement.innerText = count;
         }
 
-        // Обработчик события для счётчика, чтобы увеличивать счёт при нажатии
-        document.getElementById('count').onclick = incrementCount;
+        // Обновление отображаемого счёта изначально
+        updateCount();
+
+        // Функция для увеличения счёта
+        function incrementCount() {
+            count++;
+            localStorage.setItem('score', count); // Сохранение счёта в LocalStorage
+            updateCount(); // Обновление отображаемого счёта
+        }
+
+        // Привязываем обработчик события клика к элементам
+        coinElement.addEventListener('click', incrementCount);
+        countElement.addEventListener('click', incrementCount);
     </script>
 </body>
 </html>
