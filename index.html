@@ -15,10 +15,12 @@
             background-color: #000; /* Чёрный фон */
             color: #fff; /* Белый цвет текста счётчика */
             font-size: 48px; /* Размер шрифта для счётчика */
+            touch-action: manipulation; /* Запретить выделение на мобильных */
+            user-select: none; /* Убрать выделение текста */
         }
         .coin {
-            width: 200px;
-            height: 200px;
+            width: 100px;
+            height: 100px;
             background-image: url('логотип MOU7.jpg'); /* Укажите путь к изображению монеты */
             background-size: cover;
             cursor: pointer;
@@ -30,6 +32,8 @@
         }
         .counter {
             margin-bottom: 20px; /* Отступ между счётчиком и иконкой */
+            touch-action: manipulation; /* Запретить выделение на мобильных для счётчика */
+            user-select: none; /* Убрать выделение текста */
         }
     </style>
 </head>
@@ -50,6 +54,9 @@
             // Сохранение счёта в LocalStorage
             localStorage.setItem('score', count);
         }
+
+        // Обработчик события для счётчика, чтобы увеличивать счёт при нажатии
+        document.getElementById('count').onclick = incrementCount;
     </script>
 </body>
 </html>
