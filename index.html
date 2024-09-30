@@ -3,45 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тапалка</title>
+    <title>MOU7COIN</title>
     <style>
         body {
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
-            background-color: #121212; /* Тёмный фон */
-            color: #ffffff; /* Белый цвет для текста */
+            margin: 0;
+            background-color: #f0f0f0;
         }
-        
-        #counter {
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-        
-        #coin {
+        .coin {
+            width: 100px;
+            height: 100px;
+            background-image: url('логотип MOU7.jpg'); /* Укажите путь к изображению монеты */
+            background-size: cover;
             cursor: pointer;
-            width: 150px; /* Увеличенный размер */
+        }
+        .counter {
+            margin-top: 20px;
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
-
-    <div id="counter">0</div>
-    <img id="coin" src="логотип MOU7.jpg" alt="Монета">
+    <div class="coin" onclick="incrementCount()"></div>
+    <div class="counter">Счёт: <span id="count">0</span></div>
 
     <script>
-        let count = 0;
+        let count = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
 
-        const counterElement = document.getElementById('counter');
-        const coinElement = document.getElementById('coin');
+        // Обновление отображаемого счёта
+        document.getElementById('count').innerText = count;
 
-        coinElement.addEventListener('click', () => {
+        function incrementCount() {
             count++;
-            counterElement.textContent = count;
-        });
-    </script>
+            document.getElementById('count').innerText = count;
 
+            // Сохранение счёта в LocalStorage
+            localStorage.setItem('score', count);
+        }
+    </script>
 </body>
 </html>
