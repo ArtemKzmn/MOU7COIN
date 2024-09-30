@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOU7COIN</title>
+    <title>MO7COIN</title>
     <style>
         body {
             display: flex;
@@ -19,28 +19,35 @@
             user-select: none; /* Убрать выделение текста */
         }
         .coin {
-            width: 30vw; /* Ширина монеты, адаптивная */
-            height: 30vw; /* Высота монеты, адаптивная */
-            max-width: 300px; /* Максимальная ширина */
-            max-height: 300px; /* Максимальная высота */
+            width: 300px; /* Ширина монеты */
+            height: 300px; /* Высота монеты */
             background-image: url('логотип MOU7.jpg'); /* Укажите путь к изображению монеты */
             background-size: contain; /* Изображение должно быть целиком видно */
             background-repeat: no-repeat; /* Запрет на повторение изображения */
             cursor: pointer;
             transition: transform 0.1s ease; /* Эффект плавного изменения размера */
-            outline: none; /* Убираем синее выделение */
+            outline: none; /* Убираем синий контур */
             margin-bottom: 20px; /* Отступ между иконкой и счётчиком */
         }
         .coin:active {
             transform: scale(0.9); /* Уменьшение при нажатии */
         }
+
+        /* Специальные стили для Android, чтобы убрать синие выделения */
+        .coin:focus {
+            outline: none; /* Убираем контур при фокусе */
+        }
+        .coin:active {
+            background-color: transparent; /* Убираем цвет фона при нажатии */
+        }
+
         .counter {
             margin-bottom: 20px; /* Отступ между счётчиком и иконкой */
         }
     </style>
 </head>
 <body>
-    <div class="counter" id="count">0</div> <!-- Убрали текст "Счёт" -->
+    <div class="counter" id="count">0</div>
     <div class="coin" id="coin"></div>
 
     <script>
