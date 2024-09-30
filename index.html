@@ -61,9 +61,9 @@
         // Обновление отображаемого счёта изначально
         updateCount();
 
-        // Функция для увеличения счёта на 1
+        // Функция для увеличения счёта
         function incrementCount() {
-            count++;  // Увеличиваем счётчик на 1
+            count++;
             localStorage.setItem('score', count); // Сохранение счёта в LocalStorage
             updateCount(); // Обновление отображаемого счёта
         }
