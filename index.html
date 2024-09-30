@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>MOU7COIN</title>
     <style>
         body {
@@ -14,8 +14,9 @@
             margin: 0;
             background-color: #000; /* Чёрный фон */
             color: #fff; /* Белый цвет текста счётчика */
-            touch-action: manipulation; /* Запретить выделение на мобильных */
+            touch-action: manipulation; /* Запретить умное масштабирование */
             user-select: none; /* Убрать выделение текста */
+            overscroll-behavior: contain; /* Избежать прокрутки при касании */
         }
         .coin {
             width: 300px; /* Ширина монеты */
