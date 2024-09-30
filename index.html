@@ -14,20 +14,19 @@
             margin: 0;
             background-color: #000; /* Чёрный фон */
             color: #fff; /* Белый цвет текста счётчика */
-            font-size: 5vw; /* Размер шрифта для счётчика, адаптивный */
             touch-action: manipulation; /* Запретить выделение на мобильных */
             user-select: none; /* Убрать выделение текста */
         }
         .coin {
             width: 300px; /* Ширина монеты */
             height: 300px; /* Высота монеты */
-            background-image: url('логотип MOU7.jpg'); /* Укажите путь к изображению монеты */
+            background-image: url('логотип MOU7.jpg'); /* Путь к новому изображению монеты */
             background-size: contain; /* Изображение должно быть целиком видно */
             background-repeat: no-repeat; /* Запрет на повторение изображения */
             cursor: pointer;
             transition: transform 0.1s ease; /* Эффект плавного изменения размера */
             outline: none; /* Убираем синий контур */
-            margin-bottom: 20px; /* Отступ между иконкой и счётчиком */
+            margin: 20px 0; /* Отступы сверху и снизу */
             -webkit-tap-highlight-color: transparent; /* Убираем цвет выделения на Android */
         }
         .coin:active {
@@ -35,7 +34,7 @@
         }
 
         .counter {
-            font-size: 80px; /* Размер шрифта для счётчика */
+            font-size: 160px; /* Увеличенный размер шрифта для счётчика (в 2 раза) */
             margin-bottom: 20px; /* Отступ между счётчиком и иконкой */
         }
     </style>
