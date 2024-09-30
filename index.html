@@ -65,11 +65,11 @@
             updateCount(); // Обновление отображаемого счётчика
         }
 
-        // Обработчик событий
-        coinElement.addEventListener('click', () => {
-            incrementCount(); // Увеличиваем счёт при нажатии на монету
+        // Обработчик события touchend
+        coinElement.addEventListener('touchend', () => {
+            incrementCount(); // Увеличиваем счёт при отпускании пальца
         });
-        
+
         // Изначальное обновление отображаемого счётчика
         updateCount();
     </script>
