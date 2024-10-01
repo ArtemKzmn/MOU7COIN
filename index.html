@@ -1,78 +1,131 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>MOU7COIN</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #000; /* Чёрный фон */
-            color: #fff; /* Белый цвет текста счётчика */
-            touch-action: manipulation; /* Запретить умное масштабирование */
-            user-select: none; /* Убрать выделение текста */
-            overscroll-behavior: contain; /* Избежать прокрутки при касании */
+<!DOCTYPE html> 
+<html lang="ru"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> 
+    <title>MOU7COIN</title> 
+    <style> 
+        body { 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            background-color: #000; /* Чёрный фон */ 
+            color: #fff; /* Белый цвет текста счётчика */ 
+            touch-action: manipulation; /* Запретить умное масштабирование */ 
+            user-select: none; /* Убрать выделение текста */ 
+            overscroll-behavior: contain; /* Избежать прокрутки при касании */ 
+        } 
+        .coin { 
+            width: 300px; /* Ширина монеты */ 
+            height: 300px; /* Высота монеты */ 
+            background-image: url('images/логотип MOU7.jpg'); /* Путь к новому изображению монеты */ 
+            background-size: contain; /* Изображение должно быть целиком видно */ 
+            background-repeat: no-repeat; /* Запрет на повторение изображения */ 
+            cursor: pointer; 
+            transition: transform 0.1s ease; /* Эффект плавного изменения размера */ 
+            outline: none; /* Убираем синий контур */ 
+            margin: 20px 0; /* Отступы сверху и снизу */ 
+            -webkit-tap-highlight-color: transparent; /* Убираем цвет выделения на Android */ 
+        } 
+        .coin:active, 
+        .coin.animate { 
+            transform: scale(0.9); /* Уменьшение при нажатии */ 
+        } 
+ 
+        .counter { 
+            font-size: 70px; /* Уменьшенный размер шрифта для счётчика */ 
+            font-weight: bold; /* Жирный шрифт */ 
+            font-family: 'Impact', sans-serif; /* Шрифт Impact */ 
+            margin-bottom: 20px; /* Отступ между счётчиком и иконкой */ 
+        } 
+        
+        .progress-bar {
+            width: 300px;
+            height: 20px;
+            background-color: #fff; /* Белый фон */
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative; /* Для размещения текста внутри */
         }
-        .coin {
-            width: 300px; /* Ширина монеты */
-            height: 300px; /* Высота монеты */
-            background-image: url('логотип MOU7.jpg'); /* Путь к новому изображению монеты */
-            background-size: contain; /* Изображение должно быть целиком видно */
-            background-repeat: no-repeat; /* Запрет на повторение изображения */
-            cursor: pointer;
-            transition: transform 0.1s ease; /* Эффект плавного изменения размера */
-            outline: none; /* Убираем синий контур */
-            margin: 20px 0; /* Отступы сверху и снизу */
-            -webkit-tap-highlight-color: transparent; /* Убираем цвет выделения на Android */
+        .progress-bar-fill {
+            height: 100%;
+            background-color: #0f0; /* Зеленый цвет заполнения */
+            border-radius: 10px;
+            width: 0%; /* Начальная ширина - 0% */
+            transition: width 1s linear; /* 1 секунда для анимации */
         }
-        .coin:active,
-        .coin.animate {
-            transform: scale(0.9); /* Уменьшение при нажатии */
+                
+        .progress-bar-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            font-weight: bold;
+            color: #000; /* Черный цвет текста */
         }
+    </style> 
+</head> 
+<body> 
+    <div class="counter" id="count">0</div> 
+    <div class="coin" id="coin"></div> 
+    <div class="progress-bar">
+        <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%;"></div>
+        <div class="progress-bar-text" id="progress-bar-text">3000</div> 
+    </div>
+ 
+    <script> 
+        let count = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0; 
+        let progress = 3000; // Начальное значение шкалы
 
-        .counter {
-            font-size: 70px; /* Уменьшенный размер шрифта для счётчика */
-            font-weight: bold; /* Жирный шрифт */
-            font-family: 'Impact', sans-serif; /* Шрифт Impact */
-            margin-bottom: 20px; /* Отступ между счётчиком и иконкой */
-        }
-    </style>
-</head>
-<body>
-    <div class="counter" id="count">0</div>
-    <div class="coin" id="coin"></div>
-
-    <script>
-        // Получаем состояние счётчика из localStorage или устанавливаем в 0
-        let count = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
-
-        const countElement = document.getElementById('count');
+        const countElement = document.getElementById('count'); 
         const coinElement = document.getElementById('coin');
+        const progressBarFill = document.getElementById('progress-bar-fill'); 
+        const progressBar = document.querySelector('.progress-bar'); 
+        const progressBarText = document.getElementById('progress-bar-text'); 
 
-        // Функция обновления счётчика
-        function updateCount() {
-            countElement.innerText = count; // Обновление отображаемого счётчика
+        function updateCount() { 
+            countElement.innerText = count; 
+        } 
+ 
+        function updateProgressBar() {
+            progressBarFill.style.width = ${progress}%; 
+            progressBarText.innerText = progress; // Обновление текста внутри шкалы
         }
 
-        // Увеличиваем счёт на 1
         function incrementCount() {
-            count++; // Увеличиваем счёт на 1
-            localStorage.setItem('score', count); // Сохранение счёта в LocalStorage
-            updateCount(); // Обновление отображаемого счётчика
+            if (progress > 0) {
+                count++;
+                progress -= 100; // Уменьшаем шкалу на 100 при нажатии
+                localStorage.setItem('score', count); 
+                updateCount();
+                updateProgressBar(); 
+            } else {
+                // Шкала опустела, запускаем заполнение
+                fillProgressBar();
+            }
         }
 
-        // Обработчик события touchend
-        coinElement.addEventListener('touchend', () => {
-            incrementCount(); // Увеличиваем счёт при отпускании пальца
-        });
+        function fillProgressBar() {
+            let fillInterval = setInterval(() => {
+                progress++;
+                updateProgressBar();
+                if (progress >= 3000) {
+                    clearInterval(fillInterval);
+                }
+            }, 1000); // Заполняем за 1 секунду
+        }
 
-        // Изначальное обновление отображаемого счётчика
+        coinElement.addEventListener('touchend', () => {
+            incrementCount();
+        }); 
+
         updateCount();
-    </script>
-</body>
+        updateProgressBar(); // Изначально заполняем шкалу 
+    </script> 
+</body> 
 </html>
