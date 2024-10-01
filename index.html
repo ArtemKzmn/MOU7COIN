@@ -15,29 +15,15 @@ body {
 .coin {
   width: 300px;
   height: 300px;
+  background-image: url("логотип MOU7.jpg");
+  background-size: cover;
   cursor: pointer;
   transition: transform 0.1s ease-in-out;
-  position: relative; /* Добавлен position: relative */
-  overflow: hidden; 
+  -webkit-tap-highlight-color: transparent; /* Отключаем выделение */
 }
 
 .coin:active {
   transform: scale(0.95);
-}
-
-.coin-icon {
-  display: block;
-  width: 300px;
-  height: 300px;
-  background-image: url("логотип MOU7.jpg"); 
-  background-size: cover;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none; 
-  user-select: none; 
-  position: absolute; /* Изменено на position: absolute */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Центрирование изображения */
 }
 
 #counter {
@@ -54,9 +40,7 @@ body {
 <body>
 
 <div id="counter">0</div>
-<div class="coin">
-  <span class="coin-icon"></span>
-</div>
+<div class="coin"></div>
 
 <script>
 const coin = document.querySelector('.coin');
