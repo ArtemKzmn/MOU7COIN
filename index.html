@@ -19,6 +19,11 @@ body {
   background-image: url("логотип MOU7.jpg");
   background-size: cover;
   cursor: pointer;
+  transition: transform 0.1s ease-in-out; /* Добавляем плавную анимацию */
+}
+
+.coin:active { /* Стиль при нажатии */
+  transform: scale(0.95); /* Уменьшаем размер на 5% */
 }
 
 #counter {
@@ -50,7 +55,6 @@ if (localStorage.getItem('count')) {
 coin.addEventListener('click', () => {
   count++;
   counter.textContent = count;
-  // Сохраняем значение счетчика в LocalStorage
   localStorage.setItem('count', count);
 });
 </script>
