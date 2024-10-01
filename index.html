@@ -54,6 +54,9 @@
         const countElement = document.getElementById('count');
         const coinElement = document.getElementById('coin');
 
+        // Последнее время клика
+        let lastClickTime = 0;
+
         // Функция обновления счётчика
         function updateCount() {
             countElement.innerText = count; // Обновление отображаемого счётчика
@@ -67,7 +70,22 @@
         }
 
         // Обработчик события touchend
-        coinElement.addEventListener('touchend', () => {
+        coinElement.addEventListener('touchend', (event) => {
+            const currentTime = new Date().getTime();
+
+            // Проверка на двойной клик
+            if (currentTime - lastClickTime < 50) {
+                // Если клик меньше 50мс от предыдущего, игнорируем его
+                return;
+            }
+
+            // Проверка на одинаковую точку касания
+            if (event.changedTouches.length > 0 && event.changedTouches[0].clientX === event.changedTouches[0].pageX && event.changedTouches[0].clientY === event.changedTouches[0].pageY) {
+                // Если клик в той же точке, что и предыдущий, игнорируем его
+                return;
+            }
+
+            lastClickTime = currentTime;
             incrementCount(); // Увеличиваем счёт при отпускании пальца
         });
 
