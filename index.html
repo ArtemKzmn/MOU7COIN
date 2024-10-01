@@ -17,7 +17,7 @@ body {
   height: 300px;
   cursor: pointer;
   transition: transform 0.1s ease-in-out;
-  /* Добавлено:  overflow: hidden; */
+  position: relative; /* Добавлен position: relative */
   overflow: hidden; 
 }
 
@@ -29,14 +29,15 @@ body {
   display: block;
   width: 300px;
   height: 300px;
-  background-image: url("логотип MOU7.jpg"); /* Замените на путь к вашей иконке */
+  background-image: url("логотип MOU7.jpg"); 
   background-size: cover;
   -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none; /* Отключаем выделение текста */
-  user-select: none;  /* Отключаем выделение текста */
-  /* Добавлено:  position: relative; top: -50px; */
-  position: relative;
-  top: -50px;
+  -webkit-user-select: none; 
+  user-select: none; 
+  position: absolute; /* Изменено на position: absolute */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Центрирование изображения */
 }
 
 #counter {
