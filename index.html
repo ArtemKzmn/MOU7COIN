@@ -55,7 +55,7 @@
             height: 100%;
             background-color: #0f0; /* Зеленый цвет заполнения */
             border-radius: 10px;
-            width: 0%; /* Начальная ширина - 0% */
+            width: 100%; /* Начальная ширина - 100% */
             transition: width 1s linear; /* 1 секунда для анимации */
         }
                 
@@ -74,7 +74,7 @@
     <div class="counter" id="count">0</div> 
     <div class="coin" id="coin"></div> 
     <div class="progress-bar">
-        <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%;"></div>
+        <div class="progress-bar-fill" id="progress-bar-fill" style="width: 100%;"></div>
         <div class="progress-bar-text" id="progress-bar-text">3000</div> 
     </div>
  
@@ -100,7 +100,7 @@
         function incrementCount() {
             if (progress > 0) {
                 count++;
-                progress -= 100; // Уменьшаем шкалу на 100 при нажатии
+                progress -= 10; // Уменьшаем шкалу на 10 при нажатии
                 localStorage.setItem('score', count); 
                 updateCount();
                 updateProgressBar(); 
@@ -112,12 +112,12 @@
 
         function fillProgressBar() {
             let fillInterval = setInterval(() => {
-                progress++;
+                progress += 10; // Увеличиваем на 10 за раз
                 updateProgressBar();
                 if (progress >= 3000) {
                     clearInterval(fillInterval);
                 }
-            }, 1000); // Заполняем за 1 секунду
+            }, 100); // Заполняем за 1 секунду (100 миллисекунд)
         }
 
         coinElement.addEventListener('touchend', () => {
