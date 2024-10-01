@@ -10,7 +10,6 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  font-family: 'Impact', sans-serif;
 }
 
 .coin {
@@ -19,11 +18,11 @@ body {
   background-image: url("логотип MOU7.jpg");
   background-size: cover;
   cursor: pointer;
-  transition: transform 0.1s ease-in-out; /* Добавляем плавную анимацию */
+  transition: transform 0.1s ease-in-out;
 }
 
-.coin:active { /* Стиль при нажатии */
-  transform: scale(0.95); /* Уменьшаем размер на 5% */
+.coin:active {
+  transform: scale(0.95);
 }
 
 #counter {
@@ -33,6 +32,7 @@ body {
   top: 50px;
   left: 50%;
   transform: translateX(-50%);
+  font-family: 'Impact', sans-serif; /* Добавляем шрифт Impact */
 }
 </style>
 </head>
