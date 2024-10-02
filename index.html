@@ -19,6 +19,7 @@ body {
   transition: transform 0.1s ease-in-out;
   position: relative;
   overflow: hidden; 
+  -webkit-tap-highlight-color: transparent; /* Отключаем выделение */
 }
 
 .coin:active {
@@ -30,7 +31,7 @@ body {
   width: 300px;
   height: auto;
   background-image: url("логотип MOU7.jpg"); /* Замените на путь к вашей иконке */
-  background-size: contain; /* Добавлен background-size: contain */
+  background-size: contain;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -60,9 +61,16 @@ const coin = document.querySelector('.coin');
 const counter = document.getElementById('counter');
 let count = 0;
 
+// Загружаем значение счетчика из LocalStorage
+if (localStorage.getItem('count')) {
+  count = parseInt(localStorage.getItem('count'));
+  counter.textContent = count;
+}
+
 coin.addEventListener('click', () => {
   count++;
   counter.textContent = count;
+  localStorage.setItem('count', count);
 });
 </script>
 
