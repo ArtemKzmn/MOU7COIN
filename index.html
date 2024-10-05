@@ -21,6 +21,8 @@
       height: 300px;
       position: relative;
       cursor: pointer;
+      /* Disable blue highlight on Android */
+      -webkit-tap-highlight-color: transparent;
     }
 
     #coin img {
@@ -37,7 +39,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -300%); /* Adjusted for higher position */
+      transform: translate(-50%, -300%); 
       font-family: 'Impact', sans-serif;
       color: white;
       font-size: 72px; 
