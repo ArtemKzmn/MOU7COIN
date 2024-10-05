@@ -39,7 +39,7 @@
       width: 100%;
       height: 100%;
       background-color: white;
-      transition: width 1s linear;
+      transition: width 10s linear; /* 10 seconds transition */
     }
 
     #pickup-button {
@@ -66,49 +66,40 @@
   <div id="timer-container">
     <div id="timer-bar"></div>
   </div>
-  <button id="pickup-button">Pick up</button> 
+  <button id="pickup-button">Pick up</button>
 
   <script>
     let count = localStorage.getItem('count') || 0;
-    let timeRemaining = localStorage.getItem('timeRemaining') || 10; // Changed to 10 seconds
     const counter = document.getElementById('counter');
     const timerBar = document.getElementById('timer-bar');
     const pickupButton = document.getElementById('pickup-button');
 
     counter.textContent = count;
-    timerBar.style.width = `${(timeRemaining / 10) * 100}%`;
 
-    let timerInterval = setInterval(() => {
-      timeRemaining--;
-      timerBar.style.width = `${(timeRemaining / 10) * 100}%`;
+    // Function to start the timer and handle button display
+    function startTimer() {
+      timerBar.style.width = '100%'; // Reset the timer bar
+      pickupButton.style.display = 'none'; // Hide the button
 
-      if (timeRemaining <= 0) {
-        clearInterval(timerInterval);
-        timeRemaining = 10;
-        pickupButton.style.display = 'block'; // Show button
-      }
-    }, 1000);
+      let timerInterval = setInterval(() => {
+        timerBar.style.width = `${(timerBar.offsetWidth / 300) * 100}%`;
+
+        if (timerBar.offsetWidth <= 0) {
+          clearInterval(timerInterval);
+          pickupButton.style.display = 'block'; // Show the button
+        }
+      }, 100);
+    }
 
     pickupButton.addEventListener('click', function() {
       count += 50;
       counter.textContent = count;
       localStorage.setItem('count', count);
-      timeRemaining = 10;
-      timerBar.style.width = '100%';
-      pickupButton.style.display = 'none'; // Hide button
-      timerInterval = setInterval(() => {
-        timeRemaining--;
-        timerBar.style.width = `${(timeRemaining / 10) * 100}%`;
-
-        if (timeRemaining <= 0) {
-          clearInterval(timerInterval);
-          timeRemaining = 10;
-          pickupButton.style.display = 'block'; // Show button
-        }
-      }, 1000);
+      startTimer(); // Start the timer again
+      pickupButton.style.display = 'none'; // Hide the button
     });
 
-    localStorage.setItem('timeRemaining', timeRemaining);
+    startTimer(); // Start the initial timer
   </script>
 </body>
 
