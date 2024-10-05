@@ -21,7 +21,6 @@
       height: 300px;
       position: relative;
       cursor: pointer;
-      /* Disable blue highlight on Android */
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -31,7 +30,6 @@
       object-fit: contain;
       user-select: none;
       pointer-events: none;
-      /* Remove default focus styles */
       outline: none;
     }
 
@@ -39,7 +37,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -300%); 
+      transform: translate(-50%, -300%); /* Raised another 100px */
       font-family: 'Impact', sans-serif;
       color: white;
       font-size: 72px; 
@@ -81,13 +79,13 @@
         clickHistory[`${x},${y}`] = 1;
       }
 
-      coin.style.width = '290px';
-      coin.style.height = '290px';
+      coin.style.width = '270px'; 
+      coin.style.height = '270px'; 
 
       setTimeout(() => {
         coin.style.width = '300px';
         coin.style.height = '300px';
-      }, 10);
+      }, 200); 
     });
   </script>
 </body>
