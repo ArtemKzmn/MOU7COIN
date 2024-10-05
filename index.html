@@ -29,16 +29,18 @@
       object-fit: contain;
       user-select: none;
       pointer-events: none;
+      /* Remove default focus styles */
+      outline: none;
     }
 
     #counter {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -150%); /* Adjusted for above the image */
+      transform: translate(-50%, -200%); /* Adjusted for higher position */
       font-family: 'Impact', sans-serif;
       color: white;
-      font-size: 72px; /* 3 times larger */
+      font-size: 72px; 
       user-select: none;
       pointer-events: none;
     }
@@ -52,12 +54,12 @@
   </div>
 
   <script>
-    let count = localStorage.getItem('count') || 0; // Load count from local storage
+    let count = localStorage.getItem('count') || 0;
     const coin = document.getElementById('coin');
     const counter = document.getElementById('counter');
     const clickHistory = {};
 
-    counter.textContent = count; // Display the loaded count
+    counter.textContent = count;
 
     coin.addEventListener('click', function(event) {
       const x = event.clientX;
@@ -69,7 +71,7 @@
 
       count++;
       counter.textContent = count;
-      localStorage.setItem('count', count); // Save count to local storage
+      localStorage.setItem('count', count);
 
       if (clickHistory[`${x},${y}`]) {
         clickHistory[`${x},${y}`]++;
