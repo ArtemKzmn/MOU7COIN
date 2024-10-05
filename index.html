@@ -22,6 +22,7 @@
       position: relative;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
+      transition: width 0.1s ease-in-out, height 0.1s ease-in-out; /* Added transition */
     }
 
     #coin img {
@@ -37,7 +38,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -300%); /* Raised another 100px */
+      transform: translate(-50%, -300%); 
       font-family: 'Impact', sans-serif;
       color: white;
       font-size: 72px; 
@@ -79,8 +80,8 @@
         clickHistory[`${x},${y}`] = 1;
       }
 
-      coin.style.width = '270px'; 
-      coin.style.height = '270px'; 
+      coin.style.width = '290px'; // Smaller decrease
+      coin.style.height = '290px'; 
 
       setTimeout(() => {
         coin.style.width = '300px';
