@@ -1,78 +1,88 @@
-<!DOCTYPE html> 
-<html lang="ru"> 
-<head> 
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> 
-    <title>MOU7COIN</title> 
-    <style> 
-        body { 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            margin: 0; 
-            background-color: #000; /* Чёрный фон */ 
-            color: #fff; /* Белый цвет текста счётчика */ 
-            touch-action: manipulation; /* Запретить умное масштабирование */ 
-            user-select: none; /* Убрать выделение текста */ 
-            overscroll-behavior: contain; /* Избежать прокрутки при касании */ 
-        } 
-        .coin { 
-            width: 300px; /* Ширина монеты */ 
-            height: 300px; /* Высота монеты */ 
-            background-image: url('логотип MOU7.jpg'); /* Путь к новому изображению монеты */ 
-            background-size: contain; /* Изображение должно быть целиком видно */ 
-            background-repeat: no-repeat; /* Запрет на повторение изображения */ 
-            cursor: pointer; 
-            transition: transform 0.1s ease; /* Эффект плавного изменения размера */ 
-            outline: none; /* Убираем синий контур */ 
-            margin: 20px 0; /* Отступы сверху и снизу */ 
-            -webkit-tap-highlight-color: transparent; /* Убираем цвет выделения на Android */ 
-        } 
-        .coin:active, 
-        .coin.animate { 
-            transform: scale(0.9); /* Уменьшение при нажатии */ 
-        } 
- 
-        .counter { 
-            font-size: 70px; /* Уменьшенный размер шрифта для счётчика */ 
-            font-weight: bold; /* Жирный шрифт */ 
-            font-family: 'Impact', sans-serif; /* Шрифт Impact */ 
-            margin-bottom: 20px; /* Отступ между счётчиком и иконкой */ 
-        } 
-    </style> 
-</head> 
-<body> 
-    <div class="counter" id="count">0</div> 
-    <div class="coin" id="coin"></div> 
- 
-    <script> 
-        // Получаем состояние счётчика из localStorage или устанавливаем в 0 
-        let count = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0; 
- 
-        const countElement = document.getElementById('count'); 
-        const coinElement = document.getElementById('coin'); 
- 
-        // Функция обновления счётчика 
-        function updateCount() { 
-            countElement.innerText = count; // Обновление отображаемого счётчика 
-        } 
- 
-        // Увеличиваем счёт на 1 
-        function incrementCount() { 
-            count++; // Увеличиваем счёт на 1 
-            localStorage.setItem('score', count); // Сохранение счёта в LocalStorage 
-            updateCount(); // Обновление отображаемого счётчика 
-        } 
- 
-        // Обработчик события touchend 
-        coinElement.addEventListener('touchend', () => { 
-            incrementCount(); // Увеличиваем счёт при отпускании пальца 
-        }); 
- 
-        // Изначальное обновление отображаемого счётчика 
-        updateCount(); 
-    </script> 
-</body> 
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>MOU7COIN</title>
+  <style>
+    body {
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    #coin {
+      width: 300px;
+      height: 300px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    #coin img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    #counter {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -100%);
+      font-family: 'Impact', sans-serif;
+      color: white;
+      font-size: 24px;
+      user-select: none;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="coin">
+    <img src="логотип MOU7.jpg" alt="MOU7COIN">
+    <div id="counter">0</div>
+  </div>
+
+  <script>
+    let count = 0;
+    const coin = document.getElementById('coin');
+    const counter = document.getElementById('counter');
+    const clickHistory = {};
+
+    coin.addEventListener('click', function(event) {
+      const x = event.clientX;
+      const y = event.clientY;
+
+      if (clickHistory[`${x},${y}`] && clickHistory[`${x},${y}`] >= 5) {
+        return;
+      }
+
+      count++;
+      counter.textContent = count;
+
+      if (clickHistory[`${x},${y}`]) {
+        clickHistory[`${x},${y}`]++;
+      } else {
+        clickHistory[`${x},${y}`] = 1;
+      }
+
+      coin.style.width = '290px';
+      coin.style.height = '290px';
+
+      setTimeout(() => {
+        coin.style.width = '300px';
+        coin.style.height = '300px';
+      }, 10);
+    });
+  </script>
+</body>
+
 </html>
