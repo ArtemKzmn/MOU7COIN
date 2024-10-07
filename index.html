@@ -81,6 +81,10 @@
     <p>Таблица игроков</p>
   </div>
 
+  <div class="rectangle" onclick="window.location.href='leaderboard.html'">
+    <p>Таблица лидеров</p>
+  </div>
+
   <script> 
     let count = localStorage.getItem('count') || 0; 
     const coin = document.getElementById('coin'); 
@@ -101,9 +105,4 @@
 
     coin.addEventListener('touchend', function() {
       coin.style.width = '300px'; 
-      coin.style.height = '300px'; 
-    }); 
-  </script> 
-</body> 
-
-</html>
+      coin
