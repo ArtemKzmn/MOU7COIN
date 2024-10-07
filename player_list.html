@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Player List</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+    }
+
+    .close-button {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 30px;
+      height: 30px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .close-button::before,
+    .close-button::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 3px;
+      background-color: white;
+    }
+
+    .close-button::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .close-button::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  </style>
+</head>
+<body>
+  <h1>Player List</h1>
+  <button class="close-button" onclick="window.location.href='index.html'"></button>
+</body>
+</html>
