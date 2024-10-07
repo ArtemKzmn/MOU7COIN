@@ -48,7 +48,6 @@
 
     .rectangle {
       position: fixed;  /* Use fixed positioning for full-screen width */
-      top: 0; /* Adjust for vertical position */
       left: 50%;
       transform: translateX(-50%);
       width: 300px;
@@ -68,6 +67,29 @@
       margin: 0; /* Remove default margins */
       font-family: 'Impact', sans-serif;
     }
+
+    .bottom-rectangle { /* New class for the bottom rectangle */
+      position: fixed;
+      bottom: 20px; /* Adjust for vertical position */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 40px; /* Adjust for line thickness */
+      background-color: black;
+      border-radius: 10px; /* Smooth corners */
+      border: 3px solid white; /* White outline */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer; /* Add cursor: pointer */
+    }
+
+    .bottom-rectangle p {
+      color: white;
+      font-size: 18px; /* Adjust for desired font size */
+      margin: 0; /* Remove default margins */
+      font-family: 'Impact', sans-serif;
+    }
   </style> 
 </head> 
 
@@ -79,6 +101,14 @@
 
   <div class="rectangle" onclick="window.location.href='player_list.html'">
     <p>Таблица игроков</p>
+  </div>
+
+  <div class="rectangle" onclick="window.location.href='leaderboard.html'">
+    <p>Таблица лидеров</p>
+  </div>
+
+  <div class="bottom-rectangle" onclick="window.location.href='settings.html'">
+    <p>Настройки</p>
   </div>
 
   <script> 
