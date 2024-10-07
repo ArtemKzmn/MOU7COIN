@@ -62,32 +62,36 @@
 
     counter.textContent = count; 
 
-    coin.addEventListener('click', function(event) { 
-      const x = event.clientX; 
-      const y = event.clientY; 
+    coin.addEventListener('touchstart', function(event) { 
+      // Prevent default behavior to avoid scrolling
+      event.preventDefault(); 
 
-      // Only count the click if it's not in the same spot as the last 5 clicks
-      if (clickHistory[`${x},${y}`] && clickHistory[`${x},${y}`] >= 5) { 
-        return; 
+      for (let touch of event.touches) { 
+        const x = touch.clientX; 
+        const y = touch.clientY; 
+
+        if (clickHistory[`${x},${y}`] && clickHistory[`${x},${y}`] >= 5) { 
+          continue; // Skip this touch if it's been clicked 5 times
+        } 
+
+        count++; 
+        counter.textContent = count; 
+        localStorage.setItem('count', count); 
+
+        if (clickHistory[`${x},${y}`]) { 
+          clickHistory[`${x},${y}`]++; 
+        } else { 
+          clickHistory[`${x},${y}`] = 1; 
+        } 
+
+        coin.style.width = '290px'; 
+        coin.style.height = '290px'; 
       } 
+    }); 
 
-      count++; 
-      counter.textContent = count; 
-      localStorage.setItem('count', count); 
-
-      if (clickHistory[`${x},${y}`]) { 
-        clickHistory[`${x},${y}`]++; 
-      } else { 
-        clickHistory[`${x},${y}`] = 1; 
-      } 
-
-      coin.style.width = '290px'; // Smaller decrease 
-      coin.style.height = '290px';  
-
-      setTimeout(() => { 
-        coin.style.width = '300px'; 
-        coin.style.height = '300px'; 
-      }, 200);  
+    coin.addEventListener('touchend', function() { 
+      coin.style.width = '300px'; 
+      coin.style.height = '300px'; 
     }); 
   </script> 
 </body> 
