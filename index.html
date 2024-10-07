@@ -86,7 +86,6 @@
     count -= 50; // Lower the counter by 50
     const coin = document.getElementById('coin'); 
     const counter = document.getElementById('counter'); 
-    const clickHistory = {}; 
     let lastClickTime = 0; 
 
     counter.textContent = count; 
@@ -98,23 +97,9 @@
       } 
       lastClickTime = currentTime; 
 
-      const x = event.clientX; 
-      const y = event.clientY; 
-
-      // Only count the click if it's not in the same spot as the last 5 clicks
-      if (clickHistory[`${x},${y}`] && clickHistory[`${x},${y}`] >= 5) { 
-        return; 
-      } 
-
       count++; 
       counter.textContent = count; 
       localStorage.setItem('count', count); 
-
-      if (clickHistory[`${x},${y}`]) { 
-        clickHistory[`${x},${y}`]++; 
-      } else { 
-        clickHistory[`${x},${y}`] = 1; 
-      } 
 
       coin.style.width = '290px'; // Smaller decrease 
       coin.style.height = '290px';  
