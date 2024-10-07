@@ -87,10 +87,17 @@
     const coin = document.getElementById('coin'); 
     const counter = document.getElementById('counter'); 
     const clickHistory = {}; 
+    let lastClickTime = 0; 
 
     counter.textContent = count; 
 
     coin.addEventListener('click', function(event) { 
+      const currentTime = Date.now(); 
+      if (currentTime - lastClickTime < 500) { // 500ms delay between clicks 
+        return; 
+      } 
+      lastClickTime = currentTime; 
+
       const x = event.clientX; 
       const y = event.clientY; 
 
