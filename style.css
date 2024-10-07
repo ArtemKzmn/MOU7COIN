@@ -1,0 +1,23 @@
+/* Existing styles... */
+
+.bottom-rectangle { /* New class for the bottom rectangle */
+  position: fixed;
+  bottom: 60px; /* Adjust for vertical position */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 20px; /* Adjust for line thickness */
+  background-color: white; /* Initial fill */
+  border-radius: 10px; /* Smooth corners */
+  border: 3px solid white; /* White outline */
+}
+
+.bar-counter {
+  position: fixed;
+  bottom: 100px; /* Adjust for vertical position */
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-family: 'Impact', sans-serif;
+  font-size: 18px;
+}
