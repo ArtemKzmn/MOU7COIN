@@ -55,6 +55,7 @@
       position: absolute;
       top: 20px; /* Adjust for vertical position */
       right: 20px; /* Adjust for horizontal position */
+      transform: rotate(90deg); /* Rotate by 90 degrees */
     }
   </style> 
 </head> 
@@ -69,6 +70,7 @@
 
   <script> 
     let count = localStorage.getItem('count') || 0; 
+    count -= 50; // Lower the counter by 50
     const coin = document.getElementById('coin'); 
     const counter = document.getElementById('counter'); 
     const clickHistory = {}; 
