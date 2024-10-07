@@ -19,6 +19,9 @@ coin.addEventListener('touchstart', function(event) {
 let refillInterval = setInterval(function() {
   if (barValue < 3000) {
     barValue += 3;
+    if (barValue > 3000) {
+      barValue = 3000; // Prevent exceeding the limit
+    }
     barCounter.textContent = barValue;
     bottomRectangle.style.width = `${barValue / 3000 * 300}px`;
     localStorage.setItem('barValue', barValue);
