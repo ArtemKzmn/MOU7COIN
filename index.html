@@ -70,15 +70,26 @@
 
     .bottom-rectangle { /* New class for the bottom rectangle */
       position: fixed;
-      bottom: 20px; /* Adjust for vertical position */
+      bottom: 60px; /* Adjust for vertical position */
       left: 50%;
       transform: translateX(-50%);
       width: 300px;
-      height: 40px; /* Adjust for line thickness */
-      background-color: black;
+      height: 20px; /* Adjust for line thickness */
+      background-color: white; /* Initial fill */
       border-radius: 10px; /* Smooth corners */
       border: 3px solid white; /* White outline */
     }
+
+    .bar-counter {
+      position: fixed;
+      bottom: 100px; /* Adjust for vertical position */
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-family: 'Impact', sans-serif;
+      font-size: 18px;
+    }
+
     .button-1 { /* New class for the top button */
       position: fixed;
       top: 0; /* Position at the top */
@@ -114,31 +125,51 @@
     <p>Таблица лидеров</p>
   </div>
 
-  <div class="bottom-rectangle">
-  </div>
+  <div class="bottom-rectangle"></div>
+  <div class="bar-counter">3000</div>
 
   <script> 
     let count = localStorage.getItem('count') || 0; 
     const coin = document.getElementById('coin'); 
     const counter = document.getElementById('counter'); 
+    const bottomRectangle = document.querySelector('.bottom-rectangle');
+    const barCounter = document.querySelector('.bar-counter');
+
+    let barValue = localStorage.getItem('barValue') || 3000;
+    barCounter.textContent = barValue;
+    bottomRectangle.style.width = `${barValue / 3000 * 300}px`;
 
     counter.textContent = count; 
 
     coin.addEventListener('touchstart', function(event) { 
       event.preventDefault(); // Prevent default scroll behavior
 
-      count++; 
-      counter.textContent = count; 
-      localStorage.setItem('count', count); 
-
-      coin.style.width = '290px'; 
-      coin.style.height = '290px'; 
+      if (barValue > 0) {
+        count++; 
+        counter.textContent = count; 
+        localStorage.setItem('count', count); 
+        barValue--;
+        barCounter.textContent = barValue;
+        bottomRectangle.style.width = `${barValue / 3000 * 300}px`;
+        localStorage.setItem('barValue', barValue);
+        coin.style.width = '290px'; 
+        coin.style.height = '290px'; 
+      }
     }); 
 
     coin.addEventListener('touchend', function() {
       coin.style.width = '300px'; 
       coin.style.height = '300px'; 
     }); 
+
+    let refillInterval = setInterval(function() {
+      if (barValue < 3000) {
+        barValue += 3;
+        barCounter.textContent = barValue;
+        bottomRectangle.style.width = `${barValue / 3000 * 300}px`;
+        localStorage.setItem('barValue', barValue);
+      }
+    }, 1000);
   </script> 
 </body> 
 
