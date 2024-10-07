@@ -85,28 +85,23 @@
     let count = localStorage.getItem('count') || 0; 
     const coin = document.getElementById('coin'); 
     const counter = document.getElementById('counter'); 
-    let lastClickTime = 0; 
 
     counter.textContent = count; 
 
-    coin.addEventListener('click', function(event) { 
-      const currentTime = Date.now(); 
-      if (currentTime - lastClickTime < 500) { // 500ms delay between clicks 
-        return; 
-      } 
-      lastClickTime = currentTime; 
+    coin.addEventListener('touchstart', function(event) { 
+      event.preventDefault(); // Prevent default scroll behavior
 
       count++; 
       counter.textContent = count; 
       localStorage.setItem('count', count); 
 
-      coin.style.width = '290px'; // Smaller decrease 
-      coin.style.height = '290px';  
+      coin.style.width = '290px'; 
+      coin.style.height = '290px'; 
+    }); 
 
-      setTimeout(() => { 
-        coin.style.width = '300px'; 
-        coin.style.height = '300px'; 
-      }, 200);  
+    coin.addEventListener('touchend', function() {
+      coin.style.width = '300px'; 
+      coin.style.height = '300px'; 
     }); 
   </script> 
 </body> 
