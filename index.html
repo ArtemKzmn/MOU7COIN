@@ -90,6 +90,52 @@
       margin: 0; /* Remove default margins */
       font-family: 'Impact', sans-serif;
     }
+
+    .button-1 { /* New class for the top button */
+      position: fixed;
+      top: 80px; /* Adjusted top position */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 40px; 
+      background-color: black;
+      border-radius: 10px;
+      border: 3px solid white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .button-1 p {
+      color: white;
+      font-size: 18px; 
+      margin: 0; 
+      font-family: 'Impact', sans-serif;
+    }
+
+    .rectangle-1 { /* New class for the second rectangle */
+      position: fixed;
+      top: 140px; /* Adjusted top position */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 40px; 
+      background-color: black;
+      border-radius: 10px;
+      border: 3px solid white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .rectangle-1 p {
+      color: white;
+      font-size: 18px; 
+      margin: 0; 
+      font-family: 'Impact', sans-serif;
+    }
   </style> 
 </head> 
 
@@ -99,12 +145,12 @@
     <div id="counter">0</div> 
   </div> 
 
-  <div class="rectangle" onclick="window.location.href='player_list.html'">
-    <p>Таблица игроков</p>
+  <div class="button-1" onclick="window.location.href='leaderboard.html'">
+    <p>Таблица лидеров</p>
   </div>
 
-  <div class="rectangle" onclick="window.location.href='leaderboard.html'">
-    <p>Таблица лидеров</p>
+  <div class="rectangle-1" onclick="window.location.href='player_list.html'">
+    <p>Таблица игроков</p>
   </div>
 
   <div class="bottom-rectangle" onclick="window.location.href='settings.html'">
