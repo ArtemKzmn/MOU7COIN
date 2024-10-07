@@ -46,16 +46,14 @@
       pointer-events: none; 
     } 
 
-    .rectangle {
-      width: 200px;
-      height: 100px;
-      background-color: black;
-      border-radius: 20px; /* Adjust for desired corner smoothness */
-      border: 3px solid white; /* Adjust for desired outline thickness */
+    #line {
       position: absolute;
-      top: 20px; /* Adjust for vertical position */
-      right: 20px; /* Adjust for horizontal position */
-      transform: rotate(90deg); /* Rotate by 90 degrees */
+      top: 45%; /* Adjust for vertical position */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 10px; /* Adjust for line thickness */
+      background-color: white;
     }
   </style> 
 </head> 
@@ -63,10 +61,9 @@
 <body> 
   <div id="coin"> 
     <img src="логотип MOU7.jpg" alt="MOU7COIN"> 
+    <div id="line"></div>  
     <div id="counter">0</div> 
   </div> 
-
-  <div class="rectangle"></div>
 
   <script> 
     let count = localStorage.getItem('count') || 0; 
