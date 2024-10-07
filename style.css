@@ -5,9 +5,9 @@
   bottom: 60px; /* Adjust for vertical position */
   left: 50%;
   transform: translateX(-50%);
-  width: 300px;
+  width: 0;  /* Initial width is 0 */
   height: 20px; /* Adjust for line thickness */
-  background-color: white; /* Initial fill */
+  background-color: white; 
   border-radius: 10px; /* Smooth corners */
   border: 3px solid white; /* White outline */
 }
