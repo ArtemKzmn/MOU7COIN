@@ -81,9 +81,9 @@
       cursor: pointer; /* Add cursor: pointer */
     }
 
-    .rectangle-1 { /* New class for the second rectangle */
+    .button-1 { /* New class for the top button */
       position: fixed;
-      top: 400px; /* Adjusted top position */
+      top: 0; /* Position at the top */
       left: 50%;
       transform: translateX(-50%);
       width: 300px;
@@ -97,7 +97,7 @@
       cursor: pointer;
     }
 
-    .rectangle-1 p {
+    .button-1 p {
       color: white;
       font-size: 18px; 
       margin: 0; 
@@ -112,8 +112,8 @@
     <div id="counter">0</div> 
   </div> 
 
-  <div class="rectangle-1" onclick="window.location.href='player_list.html'">
-    <p>Таблица игроков</p>
+  <div class="button-1" onclick="window.location.href='leaderboard.html'">
+    <p>Таблица лидеров</p>
   </div>
 
   <div class="bottom-rectangle">
