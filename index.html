@@ -45,6 +45,17 @@
       user-select: none; 
       pointer-events: none; 
     } 
+
+    .rectangle {
+      width: 200px;
+      height: 100px;
+      background-color: black;
+      border-radius: 20px; /* Adjust for desired corner smoothness */
+      border: 3px solid white; /* Adjust for desired outline thickness */
+      position: absolute;
+      top: 20px; /* Adjust for vertical position */
+      right: 20px; /* Adjust for horizontal position */
+    }
   </style> 
 </head> 
 
@@ -53,6 +64,8 @@
     <img src="логотип MOU7.jpg" alt="MOU7COIN"> 
     <div id="counter">0</div> 
   </div> 
+
+  <div class="rectangle"></div>
 
   <script> 
     let count = localStorage.getItem('count') || 0; 
