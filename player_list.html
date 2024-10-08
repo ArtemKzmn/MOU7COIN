@@ -35,10 +35,44 @@
       margin-bottom: 20px;
     }
 
-    /* You can add more styles for better visual appearance */
+    .return-button {
+      position: fixed;
+      top: 10px; /* Adjust position as needed */
+      left: 10px; /* Adjust position as needed */
+      width: 40px;
+      height: 40px;
+      background-color: transparent; /* Make background transparent */
+      border: none; /* Remove border */
+      cursor: pointer;
+    }
+
+    .return-button .cross {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 2px;
+      background-color: white;
+    }
+
+    .return-button .cross::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(90deg);
+      width: 20px;
+      height: 2px;
+      background-color: white;
+    }
   </style>
 </head>
 <body>
+  <button class="return-button" onclick="window.location.href='index.html'">
+    <div class="cross"></div>
+  </button>
+
   <div id="countdown">60:00</div> 
   <div class="leaderboard-container">
     <div id="player-list">
