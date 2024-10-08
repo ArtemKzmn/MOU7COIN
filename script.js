@@ -1,7 +1,13 @@
 // Function to update the countdown timer
 function updateCountdown() {
   const countdownElement = document.getElementById('countdown');
-  let timeLeft = localStorage.getItem('timeLeft') || 3600; // 3600 seconds = 1 hour
+  let timeLeft = localStorage.getItem('timeLeft');
+
+  // If timeLeft is not set in localStorage, initialize it to 3600 seconds (1 hour)
+  if (timeLeft === null) {
+    timeLeft = 3600;
+    localStorage.setItem('timeLeft', timeLeft);
+  }
 
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
@@ -28,10 +34,7 @@ function updateLeaderboard() {
   // **Here you need to replace this with your actual logic to fetch player data 
   // from a server or data source. The following is just a placeholder for now.**
   const playerData = [
-    { username: "fizmat", tokens: 20000 },
-    { username: "john_doe", tokens: 15000 },
-    { username: "jane_doe", tokens: 10000 },
-    // Add more players as needed...
+    // ... (Fetch player data from your server or data source) 
   ];
 
   // Sort the players by tokens in descending order
