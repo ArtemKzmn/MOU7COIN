@@ -1,89 +1,89 @@
-<!DOCTYPE html> 
-<html> 
+<!DOCTYPE html>
+<html>
 
-<head> 
-  <meta charset="utf-8"> 
-  <meta name="viewport" content="width=device-width"> 
-  <title>MOU7COIN</title> 
-  <style> 
-    body { 
-      background-color: black; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-      height: 100vh; 
-      margin: 0; 
-      overflow: hidden; 
-    } 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>MOU7COIN</title>
+  <style>
+    body {
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
 
-    #coin { 
-      width: 300px; 
-      height: 300px; 
-      position: relative; 
-      cursor: pointer; 
-      -webkit-tap-highlight-color: transparent; 
-      transition: width 0.1s ease-in-out, height 0.1s ease-in-out; /* Added transition */ 
-    } 
+    #coin {
+      width: 300px;
+      height: 300px;
+      position: relative;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: width 0.1s ease-in-out, height 0.1s ease-in-out;
+    }
 
-    #coin img { 
-      width: 100%; 
-      height: 100%; 
-      object-fit: contain; 
-      user-select: none; 
-      pointer-events: none; 
-      outline: none; 
-    } 
+    #coin img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      user-select: none;
+      pointer-events: none;
+      outline: none;
+    }
 
-    #counter { 
-      position: absolute; 
-      top: 50%; 
-      left: 50%; 
-      transform: translate(-50%, -300%);  
-      font-family: 'Impact', sans-serif; 
-      color: white; 
-      font-size: 72px;  
-      user-select: none; 
-      pointer-events: none; 
-    } 
+    #counter {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -300%);
+      font-family: 'Impact', sans-serif;
+      color: white;
+      font-size: 72px;
+      user-select: none;
+      pointer-events: none;
+    }
 
     .rectangle {
-      position: fixed;  /* Use fixed positioning for full-screen width */
+      position: fixed;
       left: 50%;
       transform: translateX(-50%);
       width: 300px;
-      height: 40px; /* Adjust for line thickness */
+      height: 40px;
       background-color: black;
       border-radius: 10px;
       border: 3px solid white;
       display: flex;
       justify-content: center;
       align-items: center;
-      cursor: pointer; /* Add cursor: pointer */
+      cursor: pointer;
     }
 
     .rectangle p {
       color: white;
-      font-size: 18px; /* Adjust for desired font size */
-      margin: 0; /* Remove default margins */
+      font-size: 18px;
+      margin: 0;
       font-family: 'Impact', sans-serif;
     }
 
-    .bottom-rectangle { /* New class for the bottom rectangle */
+    .bottom-rectangle {
       position: fixed;
-      bottom: 60px; /* Adjust for vertical position */
+      bottom: 60px;
       left: 50%;
       transform: translateX(-50%);
-      width: 300px; /* Full width initially */
-      height: 20px; /* Adjust for line thickness */
-      background-color: white; 
-      border-radius: 10px; /* Smooth corners */
-      border: 3px solid white; /* White outline */
-      overflow: hidden; /* Hide any content that extends beyond the width */
+      width: 300px;
+      height: 20px;
+      background-color: white;
+      border-radius: 10px;
+      border: 3px solid white;
+      overflow: hidden;
     }
 
     .bar-counter {
       position: fixed;
-      bottom: 100px; /* Adjust for vertical position */
+      bottom: 100px;
       left: 50%;
       transform: translateX(-50%);
       color: white;
@@ -91,13 +91,13 @@
       font-size: 18px;
     }
 
-    .button-1 { /* New class for the top button */
+    .button-1 {
       position: fixed;
-      top: 0; /* Position at the top */
+      top: 0;
       left: 50%;
       transform: translateX(-50%);
       width: 300px;
-      height: 40px; 
+      height: 40px;
       background-color: black;
       border-radius: 10px;
       border: 3px solid white;
@@ -109,18 +109,30 @@
 
     .button-1 p {
       color: white;
-      font-size: 18px; 
-      margin: 0; 
+      font-size: 18px;
+      margin: 0;
       font-family: 'Impact', sans-serif;
     }
-  </style> 
-</head> 
 
-<body> 
-  <div id="coin"> 
-    <img src="логотип MOU7.jpg" alt="MOU7COIN"> 
-    <div id="counter">0</div> 
-  </div> 
+    /* Style for the scale bar */
+    #scale-bar {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0%;
+      height: 20px;
+      background-color: blue;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="coin">
+    <img src="логотип MOU7.jpg" alt="MOU7COIN">
+    <div id="counter">0</div>
+  </div>
 
   <div class="button-1" onclick="window.location.href='player_list.html'">
     <p>Таблица лидеров</p>
@@ -128,11 +140,12 @@
 
   <div class="bottom-rectangle"></div>
   <div class="bar-counter">3000</div>
+  <div id="scale-bar"></div> <!-- Container for your scale -->
 
-  <script> 
-    let count = localStorage.getItem('count') || 0; 
-    const coin = document.getElementById('coin'); 
-    const counter = document.getElementById('counter'); 
+  <script>
+    let count = localStorage.getItem('count') || 0;
+    const coin = document.getElementById('coin');
+    const counter = document.getElementById('counter');
     const bottomRectangle = document.querySelector('.bottom-rectangle');
     const barCounter = document.querySelector('.bar-counter');
 
@@ -140,41 +153,59 @@
     barCounter.textContent = barValue;
     bottomRectangle.style.width = `${barValue / 3000 * 300}px`;
 
-    counter.textContent = count; 
+    counter.textContent = count;
 
-    coin.addEventListener('touchstart', function(event) { 
-      event.preventDefault(); // Prevent default scroll behavior
+    // Scale bar logic
+    let currentScale = localStorage.getItem('scale') || 0;
+
+    function updateScale(scaleValue) {
+      document.getElementById('scale-bar').style.width = scaleValue + '%';
+    }
+
+    setInterval(() => {
+      currentScale += 3;
+      if (currentScale > 3000) {
+        currentScale = 3000;
+      }
+      localStorage.setItem('scale', currentScale);
+      updateScale(currentScale);
+    }, 1000);
+
+    updateScale(currentScale);
+
+    coin.addEventListener('touchstart', function(event) {
+      event.preventDefault();
 
       if (barValue > 0) {
-        count++; 
-        counter.textContent = count; 
-        localStorage.setItem('count', count); 
+        count++;
+        counter.textContent = count;
+        localStorage.setItem('count', count);
         barValue--;
         barCounter.textContent = barValue;
         bottomRectangle.style.width = `${barValue / 3000 * 300}px`;
         localStorage.setItem('barValue', barValue);
-        coin.style.width = '290px'; 
-        coin.style.height = '290px'; 
+        coin.style.width = '290px';
+        coin.style.height = '290px';
       }
-    }); 
+    });
 
     coin.addEventListener('touchend', function() {
-      coin.style.width = '300px'; 
-      coin.style.height = '300px'; 
-    }); 
+      coin.style.width = '300px';
+      coin.style.height = '300px';
+    });
 
     let refillInterval = setInterval(function() {
       if (barValue < 3000) {
         barValue += 3;
         if (barValue > 3000) {
-          barValue = 3000; // Prevent exceeding the limit
+          barValue = 3000;
         }
         barCounter.textContent = barValue;
         bottomRectangle.style.width = `${barValue / 3000 * 300}px`;
         localStorage.setItem('barValue', barValue);
       }
     }, 1000);
-  </script> 
-</body> 
+  </script>
+</body>
 
 </html>
