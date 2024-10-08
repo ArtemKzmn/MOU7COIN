@@ -113,18 +113,6 @@
       margin: 0;
       font-family: 'Impact', sans-serif;
     }
-
-    /* Style for the scale bar */
-    #scale-bar {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0%;
-      height: 20px;
-      background-color: blue;
-      border-radius: 10px;
-    }
   </style>
 </head>
 
@@ -140,7 +128,6 @@
 
   <div class="bottom-rectangle"></div>
   <div class="bar-counter">3000</div>
-  <div id="scale-bar"></div> <!-- Container for your scale -->
 
   <script>
     let count = localStorage.getItem('count') || 0;
@@ -159,7 +146,8 @@
     let currentScale = localStorage.getItem('scale') || 0;
 
     function updateScale(scaleValue) {
-      document.getElementById('scale-bar').style.width = scaleValue + '%';
+      // Update the scale bar width (using the existing bottomRectangle element)
+      bottomRectangle.style.width = `${scaleValue / 3000 * 300}px`;
     }
 
     setInterval(() => {
@@ -171,7 +159,8 @@
       updateScale(currentScale);
     }, 1000);
 
-    updateScale(currentScale);
+    // Initially, set the scale width to 0%
+    updateScale(0); 
 
     coin.addEventListener('touchstart', function(event) {
       event.preventDefault();
