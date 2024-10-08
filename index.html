@@ -16,13 +16,37 @@
       overflow: hidden;
     }
 
+    .top-rectangle {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 40px; /* Adjust for line thickness */
+      background-color: black;
+      border-radius: 10px;
+      border: 3px solid white;
+      display: flex;
+      justify-content: space-between; /* Distribute space evenly */
+      align-items: center;
+      padding: 0 10px; /* Add some padding */
+    }
+
+    .top-rectangle button {
+      background-color: transparent;
+      border: none;
+      color: white;
+      font-size: 18px; /* Adjust font size as needed */
+      font-family: 'Impact', sans-serif;
+      cursor: pointer;
+    }
+
     #coin {
       width: 300px;
       height: 300px;
       position: relative;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
-      transition: width 0.1s ease-in-out, height 0.1s ease-in-out;
+      transition: width 0.1s ease-in-out, height 0.1s ease-in-out; /* Added transition */
     }
 
     #coin img {
@@ -44,28 +68,6 @@
       font-size: 72px;
       user-select: none;
       pointer-events: none;
-    }
-
-    .rectangle {
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 300px;
-      height: 40px;
-      background-color: black;
-      border-radius: 10px;
-      border: 3px solid white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .rectangle p {
-      color: white;
-      font-size: 18px;
-      margin: 0;
-      font-family: 'Impact', sans-serif;
     }
 
     .bottom-rectangle {
@@ -91,43 +93,33 @@
       font-size: 18px;
     }
 
-    .button-1 {
+    #scale-bar {
       position: fixed;
-      top: 0;
+      bottom: 30px;
       left: 50%;
       transform: translateX(-50%);
-      width: 300px;
-      height: 40px;
-      background-color: black;
+      width: 0%;
+      height: 20px;
+      background-color: blue;
       border-radius: 10px;
-      border: 3px solid white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .button-1 p {
-      color: white;
-      font-size: 18px;
-      margin: 0;
-      font-family: 'Impact', sans-serif;
     }
   </style>
 </head>
 
 <body>
+  <div class="top-rectangle">
+    <button onclick="window.location.href='player_list.html'">Leaderboard</button>
+    <button onclick="window.location.href='friends.html'">Friends</button>
+  </div>
+
   <div id="coin">
     <img src="логотип MOU7.jpg" alt="MOU7COIN">
     <div id="counter">0</div>
   </div>
 
-  <div class="button-1" onclick="window.location.href='player_list.html'">
-    <p>Таблица лидеров</p>
-  </div>
-
   <div class="bottom-rectangle"></div>
   <div class="bar-counter">3000</div>
+  <div id="scale-bar"></div> 
 
   <script>
     let count = localStorage.getItem('count') || 0;
