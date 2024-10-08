@@ -1,3 +1,5 @@
+// script.js
+
 // Function to update the countdown timer
 function updateCountdown() {
   const countdownElement = document.getElementById('countdown');
@@ -33,20 +35,24 @@ function updateLeaderboard() {
 
   // **Here you need to replace this with your actual logic to fetch player data 
   // from a server or data source. The following is just a placeholder for now.**
-  const playerData = [
-    // ... (Fetch player data from your server or data source) 
-  ];
+  fetch('/api/players') // Replace with your actual API endpoint
+    .then(response => response.json())
+    .then(playerData => {
+      // Sort the players by tokens in descending order
+      playerData.sort((a, b) => b.tokens - a.tokens);
 
-  // Sort the players by tokens in descending order
-  playerData.sort((a, b) => b.tokens - a.tokens);
-
-  // Add player entries to the list
-  playerData.forEach((player, index) => {
-    const playerEntry = document.createElement('div');
-    playerEntry.classList.add('player-entry');
-    playerEntry.innerHTML = `${index + 1}. ${player.username}: ${player.tokens}`;
-    playerListElement.appendChild(playerEntry);
-  });
+      // Add player entries to the list
+      playerData.forEach((player, index) => {
+        const playerEntry = document.createElement('div');
+        playerEntry.classList.add('player-entry');
+        playerEntry.innerHTML = `${index + 1}. ${player.username}: ${player.tokens}`;
+        playerListElement.appendChild(playerEntry);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching player data:', error);
+      // Handle the error appropriately, maybe display a message to the user
+    });
 }
 
 // Call the updateLeaderboard function to display the initial list
