@@ -143,24 +143,42 @@
     counter.textContent = count;
 
     // Scale bar logic
+    let scaleInterval; // Store the interval ID
     let currentScale = localStorage.getItem('scale') || 0;
 
     function updateScale(scaleValue) {
-      // Update the scale bar width (using the existing bottomRectangle element)
       bottomRectangle.style.width = `${scaleValue / 3000 * 300}px`;
     }
 
-    setInterval(() => {
-      currentScale += 3;
-      if (currentScale > 3000) {
-        currentScale = 3000;
+    function startScale() {
+      // Start the interval only if it's not already running
+      if (!scaleInterval) {
+        scaleInterval = setInterval(() => {
+          currentScale += 3;
+          if (currentScale > 3000) {
+            currentScale = 3000;
+          }
+          localStorage.setItem('scale', currentScale);
+          updateScale(currentScale);
+        }, 1000);
       }
-      localStorage.setItem('scale', currentScale);
-      updateScale(currentScale);
-    }, 1000);
+    }
+
+    function stopScale() {
+      // Clear the interval if it's running
+      if (scaleInterval) {
+        clearInterval(scaleInterval);
+        scaleInterval = null;
+      }
+    }
 
     // Initially, set the scale width to 0%
-    updateScale(0); 
+    updateScale(currentScale);
+
+    // Start the scale if currentScale is 0
+    if (currentScale === 0) {
+      startScale();
+    }
 
     coin.addEventListener('touchstart', function(event) {
       event.preventDefault();
@@ -175,6 +193,9 @@
         localStorage.setItem('barValue', barValue);
         coin.style.width = '290px';
         coin.style.height = '290px';
+
+        // Stop the scale when the player clicks
+        stopScale();
       }
     });
 
@@ -192,8 +213,14 @@
         barCounter.textContent = barValue;
         bottomRectangle.style.width = `${barValue / 3000 * 300}px`;
         localStorage.setItem('barValue', barValue);
+
+        // Start the scale when the barValue is refilled
+        startScale();
       }
     }, 1000);
+
+    // Start the scale when the page loads
+    startScale();
   </script>
 </body>
 
