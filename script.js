@@ -60,3 +60,8 @@ updateLeaderboard();
 
 // Start the countdown timer
 setInterval(updateCountdown, 1000);
+
+// Add click event listener for the return button
+document.querySelector('.return-button').addEventListener('click', function() {
+  window.location.href = 'index.html'; // Replace 'index.html' with your main page URL
+});
