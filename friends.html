@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>MOU7COIN - Friends</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .top-rectangle {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 40px; /* Adjust for line thickness */
+      background-color: black;
+      border-radius: 10px;
+      border: 3px solid white;
+      display: flex;
+      justify-content: flex-start; /* Align the arrow to the left */
+      align-items: center;
+      padding: 0 10px; /* Add some padding */
+    }
+
+    .top-rectangle button {
+      background-color: transparent;
+      border: none;
+      color: white;
+      font-size: 18px; /* Adjust font size as needed */
+      font-family: 'Impact', sans-serif;
+      cursor: pointer;
+    }
+
+    .return-button {
+      position: relative; /* Make sure the arrow is positioned correctly within the button */
+      width: 40px;
+      height: 40px;
+      background-color: transparent; /* Make background transparent */
+      border: none; /* Remove border */
+      cursor: pointer;
+    }
+
+    .return-button .arrow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 0;
+      height: 0;
+      border-right: 10px solid white; /* Adjust the size as needed */
+      border-top: 5px solid transparent; /* Adjust the size as needed */
+      border-bottom: 5px solid transparent; /* Adjust the size as needed */
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-rectangle">
+    <button class="return-button" onclick="window.location.href='index.html'">
+      <div class="arrow"></div>
+    </button>
+  </div>
+
+  <h1>Friends</h1>
+
+  <script>
+    // You can add JavaScript for the Friends page if needed
+  </script>
+</body>
+
+</html>
