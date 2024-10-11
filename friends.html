@@ -42,7 +42,10 @@
       );
     };
 
-    ReactDOM.render(React.createElement(Friends, null), document.getElementById('friends-container'));
+    // Render the React component AFTER the DOM is ready
+    window.addEventListener('DOMContentLoaded', () => {
+      ReactDOM.render(React.createElement(Friends, null), document.getElementById('friends-container'));
+    });
   </script>
 </body>
 </html>
