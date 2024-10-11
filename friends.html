@@ -1,1 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MOU7COIN Friends</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body>
+  <div id="friends-container"></div>
 
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+  <script>
+    const Friends = () => {
+      const [friends, setFriends] = React.useState([
+        // Sample data for friends
+        { name: 'Friend 1', tokens: 500 },
+        { name: 'Friend 2', tokens: 300 }
+      ]);
+      const [referralLink, setReferralLink] = React.useState('');
+
+      const handleHomeClick = () => {
+        window.location.href = '/'; // Navigate back to index.html
+      };
+
+      return (
+        <div className="h-screen w-screen bg-black text-white">
+          <div className="fixed top-0 left-0 w-full h-12 bg-black flex justify-center items-center">
+            <button className="text-white mr-4" onClick={handleHomeClick}>Home</button>
+          </div>
+          <div className="fixed top-12 left-0 w-full h-screen overflow-y-scroll">
+            <h1 className="text-2xl font-bold mb-4">Friends</h1>
+            {friends.map((friend, index) => (
+              <div key={index} className="flex justify-between items-center h-12">
+                <span>{friend.name}</span>
+                <span>{friend.tokens}</span>
+              </div>
+            ))}
+            <input type="text" value={referralLink} className="w-full h-12 pl-4" />
+          </div>
+        </div>
+      );
+    };
+
+    ReactDOM.render(React.createElement(Friends, null), document.getElementById('friends-container'));
+  </script>
+</body>
+</html>
