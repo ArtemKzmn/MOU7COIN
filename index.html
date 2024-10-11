@@ -15,9 +15,6 @@
       const [clicks, setClicks] = React.useState(() => localStorage.getItem('clicks') ? parseInt(localStorage.getItem('clicks')) : 0);
       const [scale, setScale] = React.useState(1);
       const [barValue, setBarValue] = React.useState(3000);
-      const [leaderboard, setLeaderboard] = React.useState([]);
-      const [friends, setFriends] = React.useState([]);
-      const [referralLink, setReferralLink] = React.useState('');
 
       React.useEffect(() => {
         const interval = setInterval(() => {
@@ -43,24 +40,18 @@
         }
       };
 
-      const handleLeaderboardClick = () => {
-        window.location.href = '/leaderboard.html'; 
-      };
-
-      const handleFriendsClick = () => {
-        window.location.href = '/friends.html'; 
-      };
-
       return (
         <div className="h-screen w-screen bg-black text-white">
           <div className="fixed top-0 left-0 w-full h-12 bg-black flex justify-center items-center">
-            <button className="text-white mr-4" onClick={handleLeaderboardClick}>Leaderboard</button>
-            <button className="text-white ml-4" onClick={handleFriendsClick}>Friends</button>
+            <a href="leaderboard.html" className="text-white mr-4">Leaderboard</a>
+            <a href="friends.html" className="text-white ml-4">Friends</a>
           </div>
           <div className="flex justify-center items-center h-screen">
             <div className="text-3xl font-bold mb-4">{clicks}</div>
-            <div className="w-300 h-300 bg-white rounded-3xl flex justify-center items-center" style={{ transform: `scale(${scale})` }} onClick={handleCoinClick}>
-              <img src="логотип MOU7.jpg" alt="Coin" className="w-300 h-300 rounded-3xl" />
+            <div className="w-300 h-300 bg-white rounded-3xl flex justify-center items-center" 
+                 style={{ transform: `scale(${scale})` }} 
+                 onClick={handleCoinClick}>
+              <img src="logo.png" alt="Coin" className="w-300 h-300 rounded-3xl" />
             </div>
           </div>
           <div className="fixed bottom-0 left-0 w-full h-12 bg-black flex justify-center items-center">
