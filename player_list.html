@@ -41,7 +41,10 @@
       );
     };
 
-    ReactDOM.render(React.createElement(Leaderboard, null), document.getElementById('leaderboard-container'));
+    // Render the React component AFTER the DOM is ready
+    window.addEventListener('DOMContentLoaded', () => {
+      ReactDOM.render(React.createElement(Leaderboard, null), document.getElementById('leaderboard-container'));
+    });
   </script>
 </body>
 </html>
