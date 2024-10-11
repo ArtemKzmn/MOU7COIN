@@ -44,15 +44,11 @@
       };
 
       const handleLeaderboardClick = () => {
-        window.location.href = '/leaderboard';
+        window.location.href = '/leaderboard.html'; // Navigate to leaderboard.html
       };
 
       const handleFriendsClick = () => {
-        window.location.href = '/friends';
-      };
-
-      const handleHomeClick = () => {
-        window.location.href = '/';
+        window.location.href = '/friends.html'; // Navigate to friends.html
       };
 
       return (
@@ -70,27 +66,6 @@
           <div className="fixed bottom-0 left-0 w-full h-12 bg-black flex justify-center items-center">
             <div className="w-full h-4 bg-white rounded-3xl" style={{ width: `${barValue / 30}%` }} />
             <span className="ml-4">{barValue}</span>
-          </div>
-          <div className="fixed top-12 left-0 w-full h-screen overflow-y-scroll" style={{ display: window.location.pathname === '/leaderboard' ? 'block' : 'none' }}>
-            <h1 className="text-2xl font-bold mb-4">Leaderboard</h1>
-            <button className="text-white" onClick={handleHomeClick}>Back</button>
-            {leaderboard.map((player, index) => (
-              <div key={index} className="flex justify-between items-center h-12">
-                <span>{index + 1}. {player.name}</span>
-                <span>{player.tokens}</span>
-              </div>
-            ))}
-          </div>
-          <div className="fixed top-12 left-0 w-full h-screen overflow-y-scroll" style={{ display: window.location.pathname === '/friends' ? 'block' : 'none' }}>
-            <h1 className="text-2xl font-bold mb-4">Friends</h1>
-            <button className="text-white" onClick={handleHomeClick}>Back</button>
-            {friends.map((friend, index) => (
-              <div key={index} className="flex justify-between items-center h-12">
-                <span>{friend.name}</span>
-                <span>{friend.tokens}</span>
-              </div>
-            ))}
-            <input type="text" value={referralLink} className="w-full h-12 pl-4" />
           </div>
         </div>
       );
