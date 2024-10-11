@@ -1,1 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MOU7COIN Leaderboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body>
+  <div id="leaderboard-container"></div>
 
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+  <script>
+    const Leaderboard = () => {
+      const [leaderboard, setLeaderboard] = React.useState([
+        // Sample data for the leaderboard
+        { name: 'Player 1', tokens: 1000 },
+        { name: 'Player 2', tokens: 800 },
+        { name: 'Player 3', tokens: 600 }
+      ]);
+
+      const handleHomeClick = () => {
+        window.location.href = '/'; // Navigate back to index.html
+      };
+
+      return (
+        <div className="h-screen w-screen bg-black text-white">
+          <div className="fixed top-0 left-0 w-full h-12 bg-black flex justify-center items-center">
+            <button className="text-white mr-4" onClick={handleHomeClick}>Home</button>
+          </div>
+          <div className="fixed top-12 left-0 w-full h-screen overflow-y-scroll">
+            <h1 className="text-2xl font-bold mb-4">Leaderboard</h1>
+            {leaderboard.map((player, index) => (
+              <div key={index} className="flex justify-between items-center h-12">
+                <span>{index + 1}. {player.name}</span>
+                <span>{player.tokens}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    };
+
+    ReactDOM.render(React.createElement(Leaderboard, null), document.getElementById('leaderboard-container'));
+  </script>
+</body>
+</html>
