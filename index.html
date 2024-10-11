@@ -1,1 +1,54 @@
+<div id="mou7-game"></div>
 
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+<script>
+  const Mou7Game = () => {
+    const [clicks, setClicks] = React.useState(() => localStorage.getItem('clicks') ? parseInt(localStorage.getItem('clicks')) : 0);
+    const [scale, setScale] = React.useState(1);
+    const [barValue, setBarValue] = React.useState(3000);
+
+    React.useEffect(() => {
+      const interval = setInterval(() => {
+        if (barValue < 3000) {
+          setBarValue(barValue + 3);
+        }
+      }, 1000);
+      return () => clearInterval(interval);
+    }, [barValue]);
+
+    React.useEffect(() => {
+      localStorage.setItem('clicks', clicks.toString());
+    }, [clicks]);
+
+    const handleCoinClick = () => {
+      if (barValue > 0) {
+        setClicks(clicks + 1);
+        setBarValue(barValue - 1);
+        setScale(0.9);
+        setTimeout(() => {
+          setScale(1);
+        }, 200);
+      }
+    };
+
+    return (
+      <div className="h-screen w-screen bg-black text-white">
+        <div className="fixed top-0 left-0 w-full h-12 bg-black flex justify-center items-center rounded">
+          <p className="text-2xl font-bold mt-4">Clicks: {clicks}</p>
+        </div>
+        <div className="flex justify-center items-center h-screen">
+          <img src="логотип MOU7.jpg" alt="Coin" className="w-300 h-300 rounded cursor-pointer" style={{ transform: `scale(${scale})` }} onClick={handleCoinClick} />
+        </div>
+        <div className="fixed bottom-0 left-0 w-full h-12 bg-black flex justify-center items-center rounded">
+          <div className="w-full h-4 bg-white" style={{ width: `${barValue / 30}%` }} />
+          <span className="ml-4">{barValue}</span>
+        </div>
+      </div>
+    );
+  };
+
+  const root = ReactDOM.createRoot(document.getElementById('mou7-game'));
+  root.render(<Mou7Game />);
+</script>
