@@ -1,58 +1,86 @@
-// script.js
+import React, { useState, useEffect } from 'react';
 
-// Function to calculate the remaining time until the next hour
-function calculateRemainingTime() {
-  const now = new Date();
-  const nextHour = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours() + 1, 0, 0, 0); 
-  const timeLeft = nextHour - now;
+const App = () => {
+  const [clicks, setClicks] = useState(() => localStorage.getItem('clicks') ? parseInt(localStorage.getItem('clicks')) : 0);
+  const [scale, setScale] = useState(1);
+  const [barValue, setBarValue] = useState(3000);
+  const [leaderboard, setLeaderboard] = useState([]);
+  const [friends, setFriends] = useState([]);
+  const [referralLink, setReferralLink] = useState('');
 
-  return timeLeft;
-}
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (barValue < 3000) {
+        setBarValue(barValue + 3);
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [barValue]);
 
-// Function to update the countdown timer
-function updateCountdown() {
-  const countdownElement = document.getElementById('countdown');
-  const timeLeft = calculateRemainingTime(); // Get time remaining
+  useEffect(() => {
+    localStorage.setItem('clicks', clicks.toString());
+  }, [clicks]);
 
-  const minutes = Math.floor(timeLeft / (1000 * 60));
-  const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+  const handleCoinClick = () => {
+    if (barValue > 0) {
+      setClicks(clicks + 1);
+      setBarValue(barValue - 1);
+      setScale(0.9);
+      setTimeout(() => {
+        setScale(1);
+      }, 200);
+    }
+  };
 
-  countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-}
+  const handleLeaderboardClick = () => {
+    window.location.href = '/leaderboard';
+  };
 
-// Function to update the leaderboard data
-function updateLeaderboard() {
-  const playerListElement = document.getElementById('player-list');
-  playerListElement.innerHTML = ''; // Clear the list
+  const handleFriendsClick = () => {
+    window.location.href = '/friends';
+  };
 
-  // Fetch player data from your server or data source
-  fetch('/api/players')
-    .then(response => response.json())
-    .then(playerData => {
-      // Sort the players by tokens in descending order
-      playerData.sort((a, b) => b.tokens - a.tokens);
+  const handleHomeClick = () => {
+    window.location.href = '/';
+  };
 
-      // Add player entries to the list
-      playerData.forEach((player, index) => {
-        const playerEntry = document.createElement('div');
-        playerEntry.classList.add('player-entry');
-        playerEntry.innerHTML = `${index + 1}. ${player.username}: ${player.tokens}`;
-        playerListElement.appendChild(playerEntry);
-      });
+  return (
+    <div className="h-screen w-screen bg-black text-white">
+      <div className="fixed top-0 left-0 w-full h-12 bg-black flex justify-center items-center rounded">
+        <button className="text-white mr-4" onClick={handleLeaderboardClick}>Leaderboard</button>
+        <button className="text-white ml-4" onClick={handleFriendsClick}>Friends</button>
+      </div>
+      <div className="flex justify-center items-center h-screen">
+        <p className="text-2xl font-bold mt-4">Clicks: {clicks}</p>
+        <img src="логотип MOU7.jpg" alt="Coin" className="w-300 h-300 rounded cursor-pointer" style={{ transform: `scale(${scale})` }} onClick={handleCoinClick} />
+      </div>
+      <div className="fixed bottom-0 left-0 w-full h-12 bg-black flex justify-center items-center rounded">
+        <div className="w-full h-4 bg-white" style={{ width: `${barValue / 30}%` }}></div>
+        <span className="ml-4">{barValue}</span>
+      </div>
+      <div className="fixed top-12 left-0 w-full h-screen overflow-y-scroll" style={{ display: window.location.pathname === '/leaderboard' ? 'block' : 'none' }}>
+        <h1 className="text-2xl font-bold mb-4">Leaderboard</h1>
+        <button className="text-white" onClick={handleHomeClick}>Back</button>
+        {leaderboard.map((player, index) => (
+          <div key={index} className="flex justify-between items-center h-12">
+            <span>{index + 1}. {player.name}</span>
+            <span>{player.tokens}</span>
+          </div>
+        ))}
+      </div>
+      <div className="fixed top-12 left-0 w-full h-screen overflow-y-scroll" style={{ display: window.location.pathname === '/friends' ? 'block' : 'none' }}>
+        <h1 className="text-2xl font-bold mb-4">Friends</h1>
+        <button className="text-white" onClick={handleHomeClick}>Back</button>
+        {friends.map((friend, index) => (
+          <div key={index} className="flex justify-between items-center h-12">
+            <span>{friend.name}</span>
+            <span>{friend.tokens}</span>
+          </div>
+        ))}
+        <input type="text" value={referralLink} className="w-full h-12 pl-4" />
+      </div>
+    </div>
+  );
+};
 
-      // Update the countdown timer after displaying the list
-      updateCountdown();
-    })
-    .catch(error => {
-      console.error('Error fetching player data:', error);
-      // Handle the error appropriately, maybe display a message to the user
-    });
-}
-
-// Call the updateLeaderboard function to display the initial list
-updateLeaderboard();
-
-// Add click event listener for the return button
-document.querySelector('.return-button').addEventListener('click', function() {
-  window.location.href = 'index.html'; // Replace 'index.html' with your main page URL
-});
+export default App;
