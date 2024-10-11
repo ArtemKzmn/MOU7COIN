@@ -44,11 +44,11 @@
       };
 
       const handleLeaderboardClick = () => {
-        window.location.href = '/leaderboard.html'; // Navigate to leaderboard.html
+        window.location.href = '/leaderboard.html'; 
       };
 
       const handleFriendsClick = () => {
-        window.location.href = '/friends.html'; // Navigate to friends.html
+        window.location.href = '/friends.html'; 
       };
 
       return (
@@ -71,7 +71,10 @@
       );
     };
 
-    ReactDOM.render(React.createElement(Mou7Game, null), document.getElementById('mou7-game'));
+    // Render the React component AFTER the DOM is ready
+    window.addEventListener('DOMContentLoaded', () => {
+      ReactDOM.render(React.createElement(Mou7Game, null), document.getElementById('mou7-game'));
+    });
   </script>
 </body>
 </html>
